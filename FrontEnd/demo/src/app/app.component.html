@@ -1,0 +1,90 @@
+<div class="container mob-table">
+  <div class="headers">
+    <h2 class="table-title">Manage TODO List</h2>
+    <button class="btn add" (click)="openForm(null)">Add TODO</button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody class="text-center">
+      <tr *ngFor="let student of students">
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.description1 }}</td>
+
+        <td>
+          <button class="btn btn-primary" (click)="openForm(student)">
+            Edit
+          </button>
+        </td>
+
+        <td>
+          <button class="btn btn-danger" (click)="DeleteStudent(student['id'])">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #err>
+  <p class="text-danger">error fetching data</p>
+</ng-template>
+
+<div class="form-wrapper" *ngIf="showForm">
+  <div class="mobileForm">
+    <h2 class="text-info text-center">{{ formHeader }}</h2>
+    <div class="group" *ngIf="!editMode">
+      <label for="id">Id</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="Studentid"
+        name="id"
+      />
+    </div>
+    <div class="group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="StudentName"
+        name="sname"
+        required
+        minlength="3"
+      />
+    </div>
+    <div class="group">
+      <label for="description1">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="StudentDescription"
+        name="sdescription1"
+        required
+        minlength="3"
+      />
+    
+    </div>
+
+    <div class="group">
+      <div class="action">
+        <button class="btn btn-primary save" (click)="saveStudent()">
+          Save Changes
+        </button>
+        <button class="btn btn-danger cancel" (click)="closeForm()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
